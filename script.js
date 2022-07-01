@@ -10,9 +10,20 @@ let destinatario = "Todos";
 
 const belo=prompt("Belo teste");
 
-// if (id_user_quizz.length>1){
-//   id_user_quizz
-// }
+if (id_user_quizz.length>1){
+  let element_f=document.querySelector(".criar-quizz");
+  el_f_chs=element_f.children;
+  let element1=document.querySelector(".conteudo");
+  let element2=el_f_chs[el_f_chs.length-1];
+  console.log(element2);
+  element1.classList.toggle("escondido");
+  element2.classList.toggle("escondido");
+  element_f.getElementsByClassName.height="auto";
+}
+else{
+  let element_add_q=document.querySelector(".seus_quizzes")
+  element_add_q.classList.toggle("escondido");
+}
 
 user_quizz=call_quizz(id_user_quizz);
 user_quizz=call_quizz(id_other_quizz);

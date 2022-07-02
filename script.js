@@ -1,8 +1,7 @@
 const urlAPI = "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes";
 let user_quizzes_list;
 let other_quizzes_list;
-let id_user_quizz=["1","2","3","4","5",true];
-let id_other_quizz=["6","7","8","9","10",false];
+let id_user_quizz=[9420,9419,9418,9417];
 let user_quizz;
 
 let tipoMensagem = "message";
@@ -14,46 +13,41 @@ if (id_user_quizz.length>1){
   let element_f=document.querySelector(".criar-quizz");
   el_f_chs=element_f.children;
   let element1=document.querySelector(".conteudo");
-  let element2=el_f_chs[el_f_chs.length-1];
+  let element2=document.querySelector(".button_quizz");
   console.log(element2);
-  element1.classList.toggle("escondido");
-  element2.classList.toggle("escondido");
-  element_f.getElementsByClassName.height="auto";
-}
-else{
+  element1.style.display="none";
+  element2.style.display="none";
+  element_f.classList.remove("criar-quizz");
+  element_f.classList.add("new_criar-quizz");
+
   let element_add_q=document.querySelector(".seus_quizzes")
-  element_add_q.classList.toggle("escondido");
+  element_add_q.style.display="flex";
 }
 
-user_quizz=call_quizz(id_user_quizz);
-user_quizz=call_quizz(id_other_quizz);
+call_quizz();
 
-function call_quizz(id_quizz) {
-  user_quizz=id_quizz.pop();
-    for (let i = 0; i < id_quizz.length; i++) {
-      const promise = axios.get(`${urlAPI}/${id_quizz[i]}`);
-      promise.then(write_quizz); 
-    }
-  return user_quizz
+function call_quizz() {
+  const promise = axios.get(urlAPI);
+  promise.then(write_quizz); 
 }
 
 
 function write_quizz(resposta) {
     // console.log(resposta.data);
-    console.log(resposta.data.image)
-    create_quizz_div(resposta.data.id,resposta.data.image,resposta.data.title)
+    for (let i = 0; i < resposta.data.length; i++) {
+      console.log(id_user_quizz.includes(resposta.data[i].id))
+      if ( id_user_quizz.includes(resposta.data[i].id)  ){
+        quizzes_div=document.body.children[1].children[0].children[0].children[0];
+      }
+      else{
+        quizzes_div=document.body.children[1].children[0].children[1].children[1];
+      }
+      create_quizz_div(resposta.data[i].id,resposta.data[i].image,resposta.data[i].title,quizzes_div)
+    }
 }
 
-function create_quizz_div(div_id,img_src,title){
+function create_quizz_div(div_id,img_src,title,quizzes_div){
   console.log(user_quizz)
-  // Select father div
-  let quizzes_div;
-  if (user_quizz){
-    quizzes_div=document.body.children[1].children[0].children[0].children[0];
-  }
-  else{
-    quizzes_div=document.body.children[1].children[0].children[1].children[1];
-  }
 
   // Create quizz div
   let div = document.createElement("div");

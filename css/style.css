@@ -62,18 +62,6 @@ body {
   padding: 15px 15px;
 }
 
-/* .new_criar-quizz {
-  height: auto;
-  width: 100%;
-  border: 1px dashed #d5d5d5;
-  border-radius: 5px;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 20px;
-} */
-
 .seus_quizzes {
   font-family: 'Roboto';
   font-style: normal;
@@ -93,10 +81,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.aparecer {
-  display: flex
 }
 
 .tem-quizz {
@@ -212,6 +196,52 @@ body {
   color: #FFFFFF;
 }
 
-.escondido {
-  display: none
+.novo-quizz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.novo-quizz p {
+  size: 23px;
+  font-weight: 700;
+}
+
+.opcoes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+  background-color: white;
+  width: 600px;
+  height: 256px;
+  padding: 0 20px;
+  box-shadow: 0px 0px 10px 0px #0000000D;
+}
+
+.opcoes input {
+  height: 46px;
+  border-radius: 5px;
+  border: 1px solid #BABABA;
+  padding-left: 15px;
+}
+
+input::placeholder {
+  font-style: italic;
+  font-size: 19px;
+  color: #BABABA
+}
+
+button {
+  background-color: #EC362D;
+  border-radius: 15px;
+  border: none;
+  width: 369px;
+  height: 54px;
+  font-size: 21px;
+  color: white;
+  font-weight: 400;
+  margin-top: 85px;
 }

@@ -3,14 +3,31 @@ let user_quizzes_list;
 let other_quizzes_list;
 let id_user_quizz=[]; // 9420,9419,9418,9417
 let user_quizz;
+let quizz_usuario;
+let criar_quizz = false;
+let app = document.querySelector('.app');
+let campos;
 
 let tipoMensagem = "message";
 let destinatario = "Todos";
 
 const belo=prompt("Belo teste");
 
+function renderiza_tela() {
+  app.innerHTML += `<div class="pagina-lista-quizzes">
+    <div class="quizzes usuario">
+    </div>
+    <div class="quizzes todos">
+      <div class="cabecalho">
+        <p>Todos os Quizzes</p>
+      </div>
+      <div class="lista-quizzes">
+      </div>
+    </div>
+  </div>`
+}
+
 function muda_status_quizz() {
-  let quizz_usuario = document.querySelector(".usuario")
   if (id_user_quizz.length > 1){
     quizz_usuario.innerHTML += `<div class="tem-quizz">
     <div class="seus_quizzes">
@@ -28,10 +45,6 @@ function muda_status_quizz() {
   </div>`
   }
 }
-
-muda_status_quizz();
-
-call_quizz();
 
 function call_quizz() {
   const promise = axios.get(urlAPI);
@@ -75,5 +88,36 @@ function create_quizz_div(div_id,img_src,title,quizzes_div){
 }
 
 function novoQuizz() {
-  
+  app.innerHTML = `<div class="novo-quizz">
+    <p>Comece pelo começo</p>
+    <div class="opcoes">
+      <input type="text" placeholder="Título do seu quizz">
+      <input type="url" placeholder="URL da imagem do seu quizz">
+      <input type="number" placeholder="Quantidade de perguntas do quizz">
+      <input type="number" placeholder="Quantidade de níveis do quizz">
+    </div>
+    <button onclick="podeCriar()">
+      Prosseguir pra criar perguntas
+    </button>
+  </div>`
 }
+
+function podeCriar() {
+  campos = document.querySelectorAll('input');
+  for (let i = 0; i < campos.length; i++) {
+    if (campos[i].value === '') {
+      return false
+    } else {
+      criarPerguntas()
+    }
+  }
+}
+
+function criarPerguntas() {
+  app.innerHTML = ``
+}
+
+renderiza_tela();
+quizz_usuario = document.querySelector(".usuario");
+muda_status_quizz();
+call_quizz();

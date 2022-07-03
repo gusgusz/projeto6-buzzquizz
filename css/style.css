@@ -95,6 +95,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
+  align-items: center;
 }
 
 .aparecer {
@@ -123,6 +124,8 @@ body {
 
 .button_quizz {
   border-radius: 50px;
+  height: 40px;
+  width: 151px;
 
   border: 1px dashed #ec362d;
   display: flex;

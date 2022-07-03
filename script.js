@@ -9,31 +9,35 @@ let destinatario = "Todos";
 
 const belo=prompt("Belo teste");
 
-if (id_user_quizz.length>1){
-  let element_f=document.querySelector(".criar-quizz");
-  el_f_chs=element_f.children;
-  let element1=document.querySelector(".conteudo");
-  let element2=document.querySelector(".button_quizz");
-  console.log(element2);
-  element1.style.display="none";
-  element2.style.display="none";
-  element_f.classList.remove("criar-quizz");
-  element_f.classList.add("new_criar-quizz");
-
-  let element_add_q=document.querySelector(".seus_quizzes")
-  element_add_q.style.display="flex";
+function muda_status_quizz() {
+  if (id_user_quizz.length>1){
+    let element_f=document.querySelector(".criar-quizz");
+    // el_f_chs=element_f.children;
+    let element1=document.querySelector(".conteudo");
+    let element2=document.querySelector(".button_quizz");
+    console.log(element2);
+    element1.classList.add('escondido');
+    element2.classList.add('escondido');
+    // element_f.classList.remove("criar-quizz");
+    // element_f.classList.add("new_criar-quizz");
+  
+    let element_add_q=document.querySelector(".seus_quizzes")
+    element_add_q.style.display="flex";
+  }
 }
+
+muda_status_quizz();
 
 call_quizz();
 
 function call_quizz() {
   const promise = axios.get(urlAPI);
-  promise.then(write_quizz); 
+  promise.then(write_quizz);
 }
 
 
 function write_quizz(resposta) {
-    // console.log(resposta.data);
+    console.log(resposta.data);
     for (let i = 0; i < resposta.data.length; i++) {
       console.log(id_user_quizz.includes(resposta.data[i].id))
       if ( id_user_quizz.includes(resposta.data[i].id)  ){

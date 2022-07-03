@@ -1,7 +1,7 @@
 const urlAPI = "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes";
 let user_quizzes_list;
 let other_quizzes_list;
-let id_user_quizz=[9420,9419,9418,9417];
+let id_user_quizz=[]; // 9420,9419,9418,9417
 let user_quizz;
 
 let tipoMensagem = "message";
@@ -10,19 +10,15 @@ let destinatario = "Todos";
 const belo=prompt("Belo teste");
 
 function muda_status_quizz() {
-  if (id_user_quizz.length>1){
-    let element_f=document.querySelector(".criar-quizz");
-    // el_f_chs=element_f.children;
-    let element1=document.querySelector(".conteudo");
-    let element2=document.querySelector(".button_quizz");
-    console.log(element2);
-    element1.classList.add('escondido');
-    element2.classList.add('escondido');
-    // element_f.classList.remove("criar-quizz");
-    // element_f.classList.add("new_criar-quizz");
-  
-    let element_add_q=document.querySelector(".seus_quizzes")
-    element_add_q.style.display="flex";
+  let com_quizz = document.querySelector(".com-quizz")
+  let sem_quizz = document.querySelector(".sem-quizz")
+  if (id_user_quizz.length > 1){
+    com_quizz.classList.add('aparecer')
+    sem_quizz.classList.add('escondido')
+  }
+  else {
+    com_quizz.classList.add('escondido')
+    sem_quizz.classList.add('aparecer')
   }
 }
 
@@ -69,4 +65,8 @@ function create_quizz_div(div_id,img_src,title,quizzes_div){
   title_div.className = "titulo";
   quizzes_div.children[quizzes_div.children.length-1].appendChild(title_div);
   title_div.innerHTML =title;
+}
+
+function novoQuizz() {
+
 }

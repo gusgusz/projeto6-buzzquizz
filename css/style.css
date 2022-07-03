@@ -54,8 +54,12 @@ body {
   border-radius: 5px;
 
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+
   margin-bottom: 20px;
-  padding: 15px 15px
+  padding: 15px 15px;
 }
 
 /* .new_criar-quizz {
@@ -91,22 +95,15 @@ body {
   align-items: center;
 }
 
-.sem-quizz {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-}
-
 .aparecer {
   display: flex
 }
 
-.com-quizz {
+.tem-quizz {
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 15px
 }
 
 .add_quizz ion-icon {
@@ -201,7 +198,7 @@ body {
   /* -webkit-mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%); */
 }
 
-.quizz .titulo {
+.quizz p {
   position: absolute;
   bottom: 0;
   left: 0;

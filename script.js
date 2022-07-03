@@ -10,15 +10,22 @@ let destinatario = "Todos";
 const belo=prompt("Belo teste");
 
 function muda_status_quizz() {
-  let com_quizz = document.querySelector(".com-quizz")
-  let sem_quizz = document.querySelector(".sem-quizz")
+  let quizz_usuario = document.querySelector(".usuario")
   if (id_user_quizz.length > 1){
-    com_quizz.classList.add('aparecer')
-    sem_quizz.classList.add('escondido')
+    quizz_usuario.innerHTML += `<div class="tem-quizz">
+    <div class="seus_quizzes">
+      <p>Seus Quizzes</p>
+    </div>
+    <div class="add_quizz" onclick="novoQuizz()">
+      <ion-icon name="add"></ion-icon>
+    </div>
+  </div>`
   }
   else {
-    com_quizz.classList.add('escondido')
-    sem_quizz.classList.add('aparecer')
+    quizz_usuario.innerHTML += `<div class="criar-quizz">
+    <div class="conteudo">Você não criou nenhum<br>quizz ainda :(</div>
+    <div class="button_quizz" onclick="novoQuizz()">Criar Quizz</div>
+  </div>`
   }
 }
 
@@ -68,5 +75,5 @@ function create_quizz_div(div_id,img_src,title,quizzes_div){
 }
 
 function novoQuizz() {
-
+  
 }

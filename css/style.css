@@ -239,7 +239,7 @@ body {
   box-shadow: 0px 0px 10px 0px #0000000D;
 }
 
-.opcoes input, .pergunta input {
+.opcoes input, .pergunta input, .nivel input {
   height: 46px;
   border-radius: 5px;
   border: 1px solid #BABABA;
@@ -262,9 +262,10 @@ button {
   color: white;
   font-weight: 400;
   margin-top: 85px;
+  cursor: pointer
 }
 
-.perguntas {
+.perguntas, .niveis {
   display: flex;
   flex-direction: column;
   width: 600px;
@@ -272,7 +273,7 @@ button {
   gap: 10px
 }
 
-.pergunta {
+.pergunta, .nivel {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -283,11 +284,11 @@ button {
   box-shadow: 0px 0px 10px 0px #0000000D;
 }
 
-.pergunta p {
+.pergunta p, .nivel p {
   margin: 10px 0
 }
 
-.editar-pergunta {
+.pergunta img, .nivel img {
   cursor: pointer
 }
 
@@ -295,7 +296,7 @@ button {
   display: none
 }
 
-.pergunta-estendida {
+.pergunta-estendida, .nivel-estendido {
   flex-direction: column;
   justify-content: initial;
   align-items: initial;

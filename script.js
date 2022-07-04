@@ -99,13 +99,13 @@ function novoQuizz() {
       <input type="number" placeholder="Quantidade de perguntas do quizz" id="quantidade-perguntas">
       <input type="number" placeholder="Quantidade de níveis do quizz" id="quantidade-niveis">
     </div>
-    <button onclick="podeCriar()">
+    <button onclick="podeCriarPergunta()">
       Prosseguir pra criar perguntas
     </button>
   </div>`
 }
 
-function podeCriar() {
+function podeCriarPergunta() {
   campos = document.querySelectorAll('input');
   quantidade_perguntas = document.querySelector('#quantidade-perguntas').value;
   quantidade_niveis = document.querySelector('#quantidade-niveis').value;
@@ -123,7 +123,7 @@ function criarPerguntas() {
     <p>Crie suas perguntas</p>
     <div class="perguntas">
     </div>
-    <button onclick="podeCriar()">
+    <button onclick="podeCriarNivel()">
       Prosseguir pra criar níveis
     </button>
   </div>`
@@ -137,28 +137,87 @@ function criarPerguntas() {
 }
 
 function editarPergunta(elemento) {
-  elemento.classList.add('escondido')
   let pergunta = elemento.parentNode
+  elemento.classList.add('escondido')
   pergunta.classList.add('pergunta-estendida')
-  pergunta.innerHTML += `<input type="text" placeholder="Texto da pergunta"></input>
-  <input type="text" placeholder="Cor de fundo da pergunta"></input>
-  <p>Resposta correta</p>
-  <input type="text" placeholder="Resposta correta"></input>
-  <input type="url" placeholder="URL da imagem"></input>
-  <p>Respostas incorretas</p>
-  <div class="resposta-incorreta">
-    <input type="text" placeholder="Resposta incorreta 1"></input>
-    <input type="url" placeholder="URL da imagem 1"></input>
+  pergunta.innerHTML += `<input class='extensao' type="text" placeholder="Texto da pergunta"></input>
+  <input class='extensao' type="text" placeholder="Cor de fundo da pergunta"></input>
+  <p class='extensao'>Resposta correta</p>
+  <input class='extensao' type="text" placeholder="Resposta correta"></input>
+  <input class='extensao' type="url" placeholder="URL da imagem"></input>
+  <p class='extensao'>Respostas incorretas</p>
+  <div class="resposta-incorreta extensao">
+    <input class='extensao' type="text" placeholder="Resposta incorreta 1"></input>
+    <input class='extensao' type="url" placeholder="URL da imagem 1"></input>
   </div>
-  <div class="resposta-incorreta">
-    <input type="text" placeholder="Resposta incorreta 2"></input>
-    <input type="url" placeholder="URL da imagem 2"></input>
+  <div class="resposta-incorreta extensao">
+    <input class='extensao' type="text" placeholder="Resposta incorreta 2"></input>
+    <input class='extensao' type="url" placeholder="URL da imagem 2"></input>
   </div>
-  <div class="resposta-incorreta">
-    <input type="text" placeholder="Resposta incorreta 3"></input>
-    <input type="url" placeholder="URL da imagem 3"></input>
-  </div>
-  `
+  <div class="resposta-incorreta extensao">
+    <input class='extensao' type="text" placeholder="Resposta incorreta 3"></input>
+    <input class='extensao' type="url" placeholder="URL da imagem 3"></input>
+  </div>`
+}
+
+function podeCriarNivel() {
+  campos = document.querySelectorAll('input');
+  for (let i = 0; i < campos.length; i++) {
+    if (campos[i].value === '') {
+      return false
+    } else {
+      criarNiveis()
+    }
+  }
+}
+
+function criarNiveis() {
+  app.innerHTML = `<div class="novo-quizz">
+    <p>Agora, decida os níveis</p>
+    <div class="niveis">
+    </div>
+    <button onclick="podeFinalizarQuizz()">
+      Finalizar Quizz
+    </button>
+  </div>`
+  let niveis = document.querySelector('.niveis')
+  for (let i = 0; i < quantidade_niveis; i++) {
+    niveis.innerHTML += `<div class="nivel">
+    <p>Nível ${i + 1}</p>
+    <img onclick="editarNivel(this)" src="img/pencil.png">
+  </div>`
+  }
+}
+
+function editarNivel(elemento) {
+  elemento.classList.add('escondido')
+  let nivel = elemento.parentNode
+  nivel.classList.add('nivel-estendido')
+  nivel.innerHTML += `<input class='extensao' type="text" placeholder="Título do nível"></input>
+  <input class='extensao' type="number" placeholder="% de acerto mínima"></input>
+  <input class='extensao' type="text" placeholder="URL da imagem do nível"></input>
+  <input class='extensao' type="text" placeholder="Descrição do nível"></input>`
+}
+
+function podeFinalizarQuizz() {
+  campos = document.querySelectorAll('input');
+  for (let i = 0; i < campos.length; i++) {
+    if (campos[i].value === '') {
+      return false
+    } else {
+      finalizarQuizz()
+    }
+  }
+}
+
+function finalizarQuizz() {
+  app.innerHTML = `<div class="novo-quizz">
+    <p>Seu quizz está pronto!</p>
+    <img src=''>
+    <button onclick="acessarQuizz()">
+      Acessar Quizz
+    </button>
+  </div>`
 }
 
 renderiza_tela();

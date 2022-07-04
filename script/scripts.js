@@ -6,6 +6,7 @@ let imagemC = "";
 let perguntasC = 0;
 let nivelC = 0;
 const variaveisCriar = {};
+let id = 0;
 
 
 function renderizarPerguntasC(numb) { 
@@ -230,11 +231,11 @@ function prosseguirPnivel() {
       }
       
       pegarNiveis(nivelC);
-      axios.get(url).then(pegar);
+      axios.post(url, variaveisCriar).then(pegar);
 
       function pegar(promessa) {
-       let tamanho = promessa.dados.length;
-       axios.post(url/tamanho , variaveisCriar);
+       let id = promessa.dados.id;
+       return id;
       }
       console.log(promessa)
       document.querySelector('.criacao').innerHTML = `<div class="cabecalhoC">

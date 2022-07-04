@@ -1,7 +1,7 @@
 const urlAPI = "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes";
 let user_quizzes_list;
 let other_quizzes_list;
-let id_user_quizz=[]; // 9420,9419,9418,9417
+let id_user_quizz=[9655,9654,9653,9652]; // 9420,9419,9418,9417
 let user_quizz;
 let quizz_usuario;
 let criar_quizz = false;
@@ -10,8 +10,6 @@ let campos;
 
 let tipoMensagem = "message";
 let destinatario = "Todos";
-
-const belo=prompt("Belo teste");
 
 function renderiza_tela() {
   app.innerHTML += `<div class="pagina-lista-quizzes">
@@ -32,9 +30,9 @@ function muda_status_quizz() {
     quizz_usuario.innerHTML += `<div class="tem-quizz">
     <div class="seus_quizzes">
       <p>Seus Quizzes</p>
-    </div>
-    <div class="add_quizz" onclick="novoQuizz()">
-      <ion-icon name="add"></ion-icon>
+      <div class="add_quizz" onclick="novoQuizz()">
+        <ion-icon name="add"></ion-icon>
+      </div>
     </div>
   </div>`
   }
@@ -53,7 +51,7 @@ function call_quizz() {
 
 
 function write_quizz(resposta) {
-    console.log(resposta.data);
+    console.log(resposta.data.length);
     for (let i = 0; i < resposta.data.length; i++) {
       console.log(id_user_quizz.includes(resposta.data[i].id))
       if ( id_user_quizz.includes(resposta.data[i].id)  ){
@@ -67,12 +65,13 @@ function write_quizz(resposta) {
 }
 
 function create_quizz_div(div_id,img_src,title,quizzes_div){
-  console.log(user_quizz)
 
   // Create quizz div
   let div = document.createElement("div");
   div.id = div_id ;
+  div.onclick=wipe_out_sreen_1_show_2;
   div.className = "quizz";
+
   quizzes_div.appendChild(div);  
 
   // Create image
@@ -83,7 +82,9 @@ function create_quizz_div(div_id,img_src,title,quizzes_div){
   // Create title div inside quizz div
   let title_div = document.createElement("div");
   title_div.className = "titulo";
+  // console.log(title_div)
   quizzes_div.children[quizzes_div.children.length-1].appendChild(title_div);
+  console.log(quizzes_div.children[quizzes_div.children.length-1])
   title_div.innerHTML =title;
 }
 
@@ -121,3 +122,10 @@ renderiza_tela();
 quizz_usuario = document.querySelector(".usuario");
 muda_status_quizz();
 call_quizz();
+
+function wipe_out_sreen_1_show_2()  {
+  screen1=document.querySelector(".pagina-lista-quizzes");
+  screen1.style.display="none";
+  // screen2=document.querySelector(".pagina-2");
+  // screen2.style.display="inline";
+}

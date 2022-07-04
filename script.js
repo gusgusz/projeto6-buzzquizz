@@ -1,7 +1,7 @@
 const urlAPI = "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes";
 let user_quizzes_list;
 let other_quizzes_list;
-let id_user_quizz=[9655,9654,9653,9652]; // 9420,9419,9418,9417
+let id_user_quizz=[]; 
 let user_quizz;
 let quizz_usuario;
 let criar_quizz = false;

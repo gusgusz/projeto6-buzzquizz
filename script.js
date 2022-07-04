@@ -268,7 +268,7 @@ function finalizarQuizz() {
 }
 
 function acessarQuizz() {
-
+  call_quizz()
 }
 
 function retornaTelaInicial() {

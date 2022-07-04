@@ -117,9 +117,7 @@ function podeCriarPergunta() {
   quantidade_perguntas = Number(document.querySelector('#quantidade-perguntas').value);
   quantidade_niveis = Number(document.querySelector('#quantidade-niveis').value);
   for (let i = 0; i < campos.length; i++) {
-    if (campos[i].value === '') {
-      return false
-    } else if (nome_quizz.length < 20 || nome_quizz.length > 65 || url_img_quizz === undefined || quantidade_perguntas < 3 || quantidade_niveis < 2) {
+    if (nome_quizz.length < 20 || nome_quizz.length > 65 || url_img_quizz === undefined || quantidade_perguntas < 3 || quantidade_niveis < 2) {
       alert('Preencha os dados corretamente')
       return false
     }
@@ -150,30 +148,50 @@ function editarPergunta(elemento) {
   let pergunta = elemento.parentNode
   elemento.classList.add('escondido')
   pergunta.classList.add('pergunta-estendida')
-  pergunta.innerHTML += `<input class='extensao' type="text" placeholder="Texto da pergunta"></input>
-  <input class='extensao' type="text" placeholder="Cor de fundo da pergunta"></input>
-  <p class='extensao'>Resposta correta</p>
-  <input class='extensao' type="text" placeholder="Resposta correta"></input>
-  <input class='extensao' type="url" placeholder="URL da imagem"></input>
-  <p class='extensao'>Respostas incorretas</p>
-  <div class="resposta-incorreta extensao">
-    <input class='extensao' type="text" placeholder="Resposta incorreta 1"></input>
-    <input class='extensao' type="url" placeholder="URL da imagem 1"></input>
+  pergunta.innerHTML += `<input class='nome-pergunta' type="text" placeholder="Texto da pergunta"></input>
+  <input class='cor-pergunta' type="text" placeholder="Cor de fundo da pergunta"></input>
+  <p>Resposta correta</p>
+  <input class='resposta-correta' type="text" placeholder="Resposta correta"></input>
+  <input class='url-img-resposta-correta' type="url" placeholder="URL da imagem"></input>
+  <p>Respostas incorretas</p>
+  <div class="resposta-incorreta">
+    <input class='resposta-incorreta-1' type="text" placeholder="Resposta incorreta 1"></input>
+    <input class='url-img-resposta-incorreta-1' type="url" placeholder="URL da imagem 1"></input>
   </div>
-  <div class="resposta-incorreta extensao">
-    <input class='extensao' type="text" placeholder="Resposta incorreta 2"></input>
-    <input class='extensao' type="url" placeholder="URL da imagem 2"></input>
+  <div class="resposta-incorreta">
+    <input class='resposta-incorreta-2' type="text" placeholder="Resposta incorreta 2"></input>
+    <input class='url-img-resposta-incorreta-2' type="url" placeholder="URL da imagem 2"></input>
   </div>
-  <div class="resposta-incorreta extensao">
-    <input class='extensao' type="text" placeholder="Resposta incorreta 3"></input>
-    <input class='extensao' type="url" placeholder="URL da imagem 3"></input>
+  <div class="resposta-incorreta">
+    <input class='resposta-incorreta-3' type="text" placeholder="Resposta incorreta 3"></input>
+    <input class='url-img-resposta-incorreta-3' type="url" placeholder="URL da imagem 3"></input>
   </div>`
 }
 
 function podeCriarNivel() {
+  for (let i = 0; i < quantidade_perguntas; i++) {
+    nome_pergunta = document.querySelectorAll('.nome-pergunta')[i].value;
+    cor_pergunta = document.querySelectorAll('.cor-pergunta')[i].value;
+    resposta_correta = document.querySelectorAll('.resposta-correta')[i].value;
+    url_resposta_correta = function() {try {new URL(document.querySelectorAll('.url-img-resposta-correta')[i])} catch(err) {url_resposta_correta = undefined}};
+    resposta_incorreta_1 = document.querySelectorAll('.resposta-incorreta-1')[i].value;
+    url_resposta_incorreta_1 = function() {try {new URL(document.querySelectorAll('.url-img-resposta-incorreta-1')[i])} catch(err) {url_resposta_incorreta_1 = undefined}};
+    resposta_incorreta_2 = document.querySelectorAll('.resposta-incorreta-2')[i].value;
+    url_resposta_incorreta_2 = function() {try {new URL(document.querySelectorAll('.url-img-resposta-incorreta-2')[i])} catch(err) {url_resposta_incorreta_2 = undefined}};
+    resposta_incorreta_3 = document.querySelectorAll('.resposta-incorreta-3')[i].value;
+    url_resposta_incorreta_3 = function() {try {new URL(document.querySelectorAll('.url-img-resposta-incorreta-3')[i])} catch(err) {url_resposta_incorreta_3 = undefined}};
+    if (resposta_incorreta_2 === '') {
+      perguntas.push({title: nome_pergunta, color: cor_pergunta, answers: [{text: resposta_correta, image: url_resposta_correta, isCorrectAnswer: true}, {text: resposta_incorreta_1, image: url_resposta_incorreta_1, isCorrectAnswer: false}]})
+    } else if (resposta_incorreta_2 !== '' && resposta_incorreta_3 === '') {
+      perguntas.push({title: nome_pergunta, color: cor_pergunta, answers: [{text: resposta_correta, image: url_resposta_correta, isCorrectAnswer: true}, {text: resposta_incorreta_1, image: url_resposta_incorreta_1, isCorrectAnswer: false}, {text: resposta_incorreta_2, image: url_resposta_incorreta_2, isCorrectAnswer: false}]})
+    } else {
+      perguntas.push({title: nome_pergunta, color: cor_pergunta, answers: [{text: resposta_correta, image: url_resposta_correta, isCorrectAnswer: true}, {text: resposta_incorreta_1, image: url_resposta_incorreta_1, isCorrectAnswer: false}, {text: resposta_incorreta_2, image: url_resposta_incorreta_2, isCorrectAnswer: false}, {text: resposta_incorreta_3, image: url_resposta_incorreta_3, isCorrectAnswer: false}]})
+    }
+  }
   campos = document.querySelectorAll('input');
   for (let i = 0; i < campos.length; i++) {
-    if (campos[i].value === '') {
+    if (nome_pergunta.length < 20 || cor_pergunta.length !== 7 || cor_pergunta[0] !== '#' || resposta_correta === '' || url_resposta_correta === undefined || resposta_incorreta_1 === '' || url_resposta_incorreta_1 === undefined) {
+      alert('Preencha os dados corretamente')
       return false
     }
   }
@@ -202,27 +220,41 @@ function editarNivel(elemento) {
   elemento.classList.add('escondido')
   let nivel = elemento.parentNode
   nivel.classList.add('nivel-estendido')
-  nivel.innerHTML += `<input class='extensao' type="text" placeholder="Título do nível"></input>
-  <input class='extensao' type="number" placeholder="% de acerto mínima"></input>
-  <input class='extensao' type="text" placeholder="URL da imagem do nível"></input>
-  <input class='extensao' type="text" placeholder="Descrição do nível"></input>`
+  nivel.innerHTML += `<input class='titulo-nivel' type="text" placeholder="Título do nível"></input>
+  <input class='percentual-nivel' type="number" placeholder="% de acerto mínima"></input>
+  <input class='url-img-nivel' type="text" placeholder="URL da imagem do nível"></input>
+  <input class='descricao-nivel' type="text" placeholder="Descrição do nível"></input>`
 }
 
 function podeFinalizarQuizz() {
+  for (let i = 0; i < quantidade_niveis; i++) {
+    titulo_nivel = document.querySelectorAll('.titulo-nivel')[i].value;
+    percentual_nivel = Number(document.querySelectorAll('.percentual-nivel')[i].value);
+    url_imagem_nivel = function() {try {new URL(document.querySelectorAll('.url-img-nivel')[i])} catch(err) {url_imagem_nivel = undefined}};
+    descricao_nivel = document.querySelectorAll('.descricao-nivel')[i].value;
+    niveis.push({title: titulo_nivel, minValue: percentual_nivel, image: url_imagem_nivel, text: descricao_nivel})
+  }
   campos = document.querySelectorAll('input');
   for (let i = 0; i < campos.length; i++) {
-    if (campos[i].value === '') {
-      return false
-    } else {
-      finalizarQuizz()
+    if (titulo_nivel.length < 10 || percentual_nivel < 0 || percentual_nivel > 100 || url_imagem_nivel === undefined || descricao_nivel.length < 30) {
+      alert('Preencha os dados corretamente')
     }
   }
+  let percentuais = []
+  for (let i = 0; i < document.querySelectorAll('.percentual-nivel').length; i++) {
+    percentual_nivel = Number(document.querySelectorAll('.percentual-nivel')[i].value)
+    percentuais.push(percentual_nivel)
+  }
+  if (!percentuais.includes(0)) {
+    alert('Preencha os dados corretamente')
+  }
+  finalizarQuizz()
 }
 
 function finalizarQuizz() {
   app.innerHTML = `<div class="novo-quizz">
     <p>Seu quizz está pronto!</p>
-    <img src=''>
+    <img src='${url_img_quizz}'>
     <button onclick="acessarQuizz()">
       Acessar Quizz
     </button>

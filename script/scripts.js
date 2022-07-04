@@ -7,6 +7,7 @@ let perguntasC = 0;
 let nivelC = 0;
 const variaveisCriar = {};
 let id = 0;
+let id_user_quizz = {};
 
 
 function renderizarPerguntasC(numb) { 
@@ -237,6 +238,7 @@ function prosseguirPnivel() {
        let id = promessa.dados.id;
        return id;
       }
+      id_user_quizz = push.id;
       console.log(promessa)
       document.querySelector('.criacao').innerHTML = `<div class="cabecalhoC">
       <div class="tituloC">

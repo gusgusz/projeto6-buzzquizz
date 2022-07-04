@@ -130,7 +130,7 @@ function criarPerguntas() {
   let perguntas = document.querySelector('.perguntas')
   for (let i = 0; i < quantidade_perguntas; i++) {
     perguntas.innerHTML += `<div class="pergunta">
-    <p>Pergunta ${i}</p>
+    <p>Pergunta ${i + 1}</p>
     <img onclick="editarPergunta(this)" src="img/pencil.png">
   </div>`
   }
@@ -140,23 +140,23 @@ function editarPergunta(elemento) {
   elemento.classList.add('escondido')
   let pergunta = elemento.parentNode
   pergunta.classList.add('pergunta-estendida')
-  pergunta.innerHTML += `<input></input>
-  <input></input>
+  pergunta.innerHTML += `<input type="text" placeholder="Texto da pergunta"></input>
+  <input type="text" placeholder="Cor de fundo da pergunta"></input>
   <p>Resposta correta</p>
-  <input></input>
-  <input></input>
+  <input type="text" placeholder="Resposta correta"></input>
+  <input type="url" placeholder="URL da imagem"></input>
   <p>Respostas incorretas</p>
   <div class="resposta-incorreta">
-    <input></input>
-    <input></input>
+    <input type="text" placeholder="Resposta incorreta 1"></input>
+    <input type="url" placeholder="URL da imagem 1"></input>
   </div>
   <div class="resposta-incorreta">
-    <input></input>
-    <input></input>
+    <input type="text" placeholder="Resposta incorreta 2"></input>
+    <input type="url" placeholder="URL da imagem 2"></input>
   </div>
   <div class="resposta-incorreta">
-    <input></input>
-    <input></input>
+    <input type="text" placeholder="Resposta incorreta 3"></input>
+    <input type="url" placeholder="URL da imagem 3"></input>
   </div>
   `
 }

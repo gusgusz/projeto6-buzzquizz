@@ -7,8 +7,13 @@ let quizz_usuario;
 let criar_quizz = false;
 let app = document.querySelector('.app');
 let campos;
+let novo_quizz;
+let nome_quizz;
+let url_img_quizz;
 let quantidade_perguntas;
 let quantidade_niveis;
+let perguntas = [];
+let niveis = [];
 
 let tipoMensagem = "message";
 let destinatario = "Todos";
@@ -94,8 +99,8 @@ function novoQuizz() {
   app.innerHTML = `<div class="novo-quizz">
     <p>Comece pelo começo</p>
     <div class="opcoes">
-      <input type="text" placeholder="Título do seu quizz">
-      <input type="url" placeholder="URL da imagem do seu quizz">
+      <input type="text" placeholder="Título do seu quizz" id="nome">
+      <input type="url" placeholder="URL da imagem do seu quizz" id="url-img-quizz">
       <input type="number" placeholder="Quantidade de perguntas do quizz" id="quantidade-perguntas">
       <input type="number" placeholder="Quantidade de níveis do quizz" id="quantidade-niveis">
     </div>
@@ -107,15 +112,20 @@ function novoQuizz() {
 
 function podeCriarPergunta() {
   campos = document.querySelectorAll('input');
-  quantidade_perguntas = document.querySelector('#quantidade-perguntas').value;
-  quantidade_niveis = document.querySelector('#quantidade-niveis').value;
+  nome_quizz = document.querySelector('#nome');
+  url_img_quizz = function() {try {new URL(document.querySelector('#url-img-quizz'))} catch(err) {url_img_quizz = undefined}};
+  quantidade_perguntas = Number(document.querySelector('#quantidade-perguntas').value);
+  quantidade_niveis = Number(document.querySelector('#quantidade-niveis').value);
   for (let i = 0; i < campos.length; i++) {
     if (campos[i].value === '') {
       return false
-    } else {
-      criarPerguntas()
+    } else if (nome_quizz.length < 20 || nome_quizz.length > 65 || url_img_quizz === undefined || quantidade_perguntas < 3 || quantidade_niveis < 2) {
+      alert('Preencha os dados corretamente')
+      return false
     }
   }
+  novo_quizz = {title: nome_quizz, image: url_img_quizz, questions: perguntas, levels: niveis}
+  criarPerguntas()
 }
 
 function criarPerguntas() {
@@ -165,10 +175,9 @@ function podeCriarNivel() {
   for (let i = 0; i < campos.length; i++) {
     if (campos[i].value === '') {
       return false
-    } else {
-      criarNiveis()
     }
   }
+  criarNiveis()
 }
 
 function criarNiveis() {

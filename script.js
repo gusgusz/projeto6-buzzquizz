@@ -238,6 +238,7 @@ function podeFinalizarQuizz() {
   for (let i = 0; i < campos.length; i++) {
     if (titulo_nivel.length < 10 || percentual_nivel < 0 || percentual_nivel > 100 || url_imagem_nivel === undefined || descricao_nivel.length < 30) {
       alert('Preencha os dados corretamente')
+      return false
     }
   }
   let percentuais = []
@@ -247,6 +248,7 @@ function podeFinalizarQuizz() {
   }
   if (!percentuais.includes(0)) {
     alert('Preencha os dados corretamente')
+    return false
   }
   finalizarQuizz()
 }
@@ -261,6 +263,8 @@ function finalizarQuizz() {
     <p class='retorna-inicio' onclick="retornaTelaInicial()">Voltar pra home
     <p>
   </div>`
+  const promise = axios.post(urlAPI, novo_quizz);
+  promise.then(write_quizz)
 }
 
 function acessarQuizz() {

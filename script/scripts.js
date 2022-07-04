@@ -55,9 +55,10 @@ function abrirPerguntasC(px) {
 
   function irCriar() {
     // vai pra tela 3
-    document.querySelector('.pagina-lista-quizzes').classList.add('esconder');
+   
 
-    const criar1 = ` <div class="cabecalhoC">
+    const criar1 = ` 
+    <div class="cabecalhoC">
     <div class="tituloC">
       Comece pelo começo
     </div>
@@ -69,8 +70,10 @@ function abrirPerguntasC(px) {
     <input id="placeholder" type="number" placeholder="Quantidade de níveis do quizz" class="input-nivel">
   </div>
   <button onclick="prosseguirPcriar()">Prosseguir pra criar perguntas</button>
+  
   `;
-  document.querySelector('.app .criacao').innerHTML = criar1;
+  document.querySelector('.app ').innerHTML = `<div class="ciriacao"></div>`;
+  document.querySelector('.criacao ').innerHTML = criar1;
 }
 
 function prosseguirPcriar() {
@@ -246,7 +249,7 @@ function prosseguirPnivel() {
         </div>
     
     <button onclick="acessar()">Acessar Quizz</button>
-    <button class="sem" onclick="acessar()">Voltar pra home</button>
+    <button  onclick="acessar()">Voltar pra home</button>
       
       
     </div>`

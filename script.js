@@ -258,7 +258,17 @@ function finalizarQuizz() {
     <button onclick="acessarQuizz()">
       Acessar Quizz
     </button>
+    <p class='retorna-inicio' onclick="retornaTelaInicial()">Voltar pra home
+    <p>
   </div>`
+}
+
+function acessarQuizz() {
+
+}
+
+function retornaTelaInicial() {
+
 }
 
 renderiza_tela();

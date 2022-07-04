@@ -7,6 +7,8 @@ let quizz_usuario;
 let criar_quizz = false;
 let app = document.querySelector('.app');
 let campos;
+let quantidade_perguntas;
+let quantidade_niveis;
 
 let tipoMensagem = "message";
 let destinatario = "Todos";
@@ -93,8 +95,8 @@ function novoQuizz() {
     <div class="opcoes">
       <input type="text" placeholder="Título do seu quizz">
       <input type="url" placeholder="URL da imagem do seu quizz">
-      <input type="number" placeholder="Quantidade de perguntas do quizz">
-      <input type="number" placeholder="Quantidade de níveis do quizz">
+      <input type="number" placeholder="Quantidade de perguntas do quizz" id="quantidade-perguntas">
+      <input type="number" placeholder="Quantidade de níveis do quizz" id="quantidade-niveis">
     </div>
     <button onclick="podeCriar()">
       Prosseguir pra criar perguntas
@@ -104,6 +106,8 @@ function novoQuizz() {
 
 function podeCriar() {
   campos = document.querySelectorAll('input');
+  quantidade_perguntas = document.querySelector('#quantidade-perguntas').value;
+  quantidade_niveis = document.querySelector('#quantidade-niveis').value;
   for (let i = 0; i < campos.length; i++) {
     if (campos[i].value === '') {
       return false
@@ -114,7 +118,46 @@ function podeCriar() {
 }
 
 function criarPerguntas() {
-  app.innerHTML = ``
+  app.innerHTML = `<div class="novo-quizz">
+    <p>Crie suas perguntas</p>
+    <div class="perguntas">
+    </div>
+    <button onclick="podeCriar()">
+      Prosseguir pra criar níveis
+    </button>
+  </div>`
+  let perguntas = document.querySelector('.perguntas')
+  for (let i = 0; i < quantidade_perguntas; i++) {
+    perguntas.innerHTML += `<div class="pergunta">
+    <p>Pergunta ${i}</p>
+    <img onclick="editarPergunta(this)" src="img/pencil.png">
+  </div>`
+  }
+}
+
+function editarPergunta(elemento) {
+  elemento.classList.add('escondido')
+  let pergunta = elemento.parentNode
+  pergunta.classList.add('pergunta-estendida')
+  pergunta.innerHTML += `<input></input>
+  <input></input>
+  <p>Resposta correta</p>
+  <input></input>
+  <input></input>
+  <p>Respostas incorretas</p>
+  <div class="resposta-incorreta">
+    <input></input>
+    <input></input>
+  </div>
+  <div class="resposta-incorreta">
+    <input></input>
+    <input></input>
+  </div>
+  <div class="resposta-incorreta">
+    <input></input>
+    <input></input>
+  </div>
+  `
 }
 
 renderiza_tela();
